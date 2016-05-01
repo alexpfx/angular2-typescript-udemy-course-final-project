@@ -1,4 +1,4 @@
-System.register(['angular2/core', "angular2/alt_router"], function(exports_1, context_1) {
+System.register(['angular2/core'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,15 +10,12 @@ System.register(['angular2/core', "angular2/alt_router"], function(exports_1, co
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, alt_router_1;
+    var core_1;
     var PostsComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
-            },
-            function (alt_router_1_1) {
-                alt_router_1 = alt_router_1_1;
             }],
         execute: function() {
             PostsComponent = (function () {
@@ -27,8 +24,7 @@ System.register(['angular2/core', "angular2/alt_router"], function(exports_1, co
                 PostsComponent = __decorate([
                     core_1.Component({
                         selector: 'posts',
-                        templateUrl: './app/posts.component.html',
-                        directives: [alt_router_1.ROUTER_DIRECTIVES]
+                        templateUrl: './app/posts.component.html'
                     }), 
                     __metadata('design:paramtypes', [])
                 ], PostsComponent);
