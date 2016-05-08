@@ -1,4 +1,4 @@
-System.register(['angular2/core', "angular2/router"], function(exports_1, context_1) {
+System.register(['angular2/core', "angular2/router", "angular2/platform/common"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', "angular2/router"], function(exports_1, contex
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1;
+    var core_1, router_1, common_1;
     var NavBarComponent;
     return {
         setters:[
@@ -19,18 +19,28 @@ System.register(['angular2/core', "angular2/router"], function(exports_1, contex
             },
             function (router_1_1) {
                 router_1 = router_1_1;
+            },
+            function (common_1_1) {
+                common_1 = common_1_1;
             }],
         execute: function() {
             NavBarComponent = (function () {
-                function NavBarComponent() {
+                function NavBarComponent(location, router) {
+                    this.location = location;
+                    this.router = router;
+                    console.log(this.location);
                 }
+                NavBarComponent.prototype.isActive = function (route) {
+                    var route = this.router.generate([route]);
+                    return this.router.isRouteActive(route);
+                };
                 NavBarComponent = __decorate([
                     core_1.Component({
                         selector: 'navbar',
                         templateUrl: './app/navbar.component.html',
                         directives: [router_1.ROUTER_DIRECTIVES]
                     }), 
-                    __metadata('design:paramtypes', [])
+                    __metadata('design:paramtypes', [common_1.Location, router_1.Router])
                 ], NavBarComponent);
                 return NavBarComponent;
             }());

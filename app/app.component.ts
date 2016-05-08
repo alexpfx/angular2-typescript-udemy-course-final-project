@@ -5,12 +5,16 @@ import {NavBarComponent} from "./navbar.component";
 import {UsersComponent} from "./users.component";
 import {PostsComponent} from "./posts.component";
 import {HomeComponent} from "./home.component";
+import {UserComponent} from "./user.component";
 
 @Component({
     selector: 'my-app',
-    template: `<h1>My First Angular 2 App</h1>
+    template: `
        <navbar></navbar>
-        <router-outlet></router-outlet>       
+       <div class="container">
+            <router-outlet></router-outlet>
+        </div>
+               
 `,
     directives: [NavBarComponent, ROUTER_DIRECTIVES]
 })
@@ -18,6 +22,8 @@ import {HomeComponent} from "./home.component";
     [
         {path: '/home', name: 'Home', component: HomeComponent, useAsDefault: true},
         {path: '/users', name: 'Users', component: UsersComponent},
+        {path: '/users/:id', name: 'UserDetail', component: UsersComponent},
+        {path: '/users/new', name: 'User', component: UserComponent},
         {path: '/posts', name: 'Posts', component: PostsComponent},
         {path: '/*other', name: 'Other', redirectTo: ['Home']}
     ]

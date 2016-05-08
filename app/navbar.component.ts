@@ -1,5 +1,6 @@
 import {Component} from 'angular2/core'
-import {ROUTER_DIRECTIVES} from "angular2/router";
+import {ROUTER_DIRECTIVES, Router} from "angular2/router";
+import {Location} from "angular2/platform/common";
 
 @Component({
     selector:'navbar',
@@ -8,5 +9,16 @@ import {ROUTER_DIRECTIVES} from "angular2/router";
 
 })
 export class NavBarComponent{
-    
+
+
+    constructor(private location:Location, private router:Router){
+        console.log(this.location);
+    }
+
+    isActive (route){
+        var route = this.router.generate([route]);
+        return this.router.isRouteActive(route);
+    }
+
+
 }
