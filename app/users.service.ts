@@ -14,6 +14,10 @@ export class UsersService{
     getUsers (){
         return this.http.get(this.url).map(res => res.json());
     }
+
+    getUser (id: string){
+        return this.http.get(this.url+'/'+id).map (res => res.json);
+    }
     
     saveUser (user){
         return this.http.post(this.url, JSON.stringify(user)).map(res => {

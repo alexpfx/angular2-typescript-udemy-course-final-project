@@ -1,3 +1,10 @@
-/**
- * Created by alexandre on 07/05/2016.
- */
+import {Component} from 'angular2/core'
+
+@Component({
+    
+
+})
+
+export class UserDetailComponent{
+
+}
