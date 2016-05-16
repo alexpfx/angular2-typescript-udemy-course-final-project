@@ -37,6 +37,17 @@ System.register(['angular2/core', 'angular2/http', "./users.service", "angular2/
                         _this.users = us;
                     });
                 };
+                UsersComponent.prototype.deleteUser = function (user) {
+                    var _this = this;
+                    if (confirm("Are you sure you want to delete " + user.name + "?")) {
+                        var index = this.users.indexOf(user);
+                        this.users.splice(index, 1);
+                        this.usersServices.deleteUser(user.id).subscribe(null, function (err) {
+                            alert('could not delete user');
+                            _this.users.splice(index, 0, user);
+                        });
+                    }
+                };
                 UsersComponent = __decorate([
                     core_1.Component({
                         selector: 'users',

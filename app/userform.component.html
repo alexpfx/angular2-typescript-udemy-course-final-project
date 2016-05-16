@@ -1,5 +1,5 @@
 <form [ngFormModel]="userForm"
-      (ngSubmit)="onSubmit()"
+      (ngSubmit)="save()"
       #f="ngForm">
 
     <fieldset>
@@ -96,7 +96,7 @@
                    id="zipCode"
                    placeholder="Zip Code"
                    ngControl="zipCode"
-                   [(ngModel)]="user.address.zipCode"
+                   [(ngModel)]="user.address.zipcode"
             >
         </div>
 

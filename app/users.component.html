@@ -1,6 +1,8 @@
 <h2>Users</h2>
 <div class="form-group">
-    <button class="btn btn-primary" [routerLink]="['User', {mode: 'New'}]" >Add User</button>
+    <button class="btn btn-primary"
+            [routerLink]="['User', {mode: 'New'}]">Add User
+    </button>
 </div>
 <table class="table table-bordered table-striped">
     <thead>
@@ -24,16 +26,22 @@
     </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let user of users">
+    <tr *ngFor="let user of users">
 
-            <td>{{user.id}}</td>
-            <td>{{user.name}}</td>
-            <td>{{user.email}}</td>
+        <td>{{user.id}}</td>
+        <td>{{user.name}}</td>
+        <td>{{user.email}}</td>
 
-            <td align="center"><a [routerLink]="['UserDetail', {id:user.id, mode: 'Edit'}]"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
-            <td align="center"><i class="fa fa-times" aria-hidden="true"></i></td>
+        <td align="center">
+            <a [routerLink]="['UserDetail', {id:user.id}]"><i class="fa fa-pencil-square-o"
+                                                              aria-hidden="true"></i></a>
+        </td>
+        <td align="center">
+            <a (click)="deleteUser (user)"><i class="fa fa-times"
+                                              aria-hidden="true"></i></a>
+        </td>
 
-        </tr>
+    </tr>
 
     </tbody>
 

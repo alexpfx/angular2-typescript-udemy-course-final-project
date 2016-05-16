@@ -14,7 +14,7 @@ import {HTTP_PROVIDERS} from "angular2/http";
 })
 export class UserFormComponent implements CanDeactivate, OnInit{
     userForm:ControlGroup;
-    user:User;
+    user = new User();
     mode = 'New';
     
     routerCanDeactivate(next, previous) {
@@ -28,12 +28,14 @@ export class UserFormComponent implements CanDeactivate, OnInit{
         this.mode = id ? 'Edit' : 'New';
         if (!id)
             return;
-        // this.userServices.getUser(id).subscribe(user => this.user = user, res => {
-        //     if (res.status == 404){
-        //         this.router.navigate(['NotFounds']);
-        //     }
-        // });
-        //
+
+
+        this.userServices.getUser(id).subscribe(user => this.user = user, res => {
+            if (res.status == 404){
+                this.router.navigate(['NotFound']);
+            }
+        });
+
         
         return undefined;
     }
@@ -56,10 +58,19 @@ export class UserFormComponent implements CanDeactivate, OnInit{
     }
 
 
-    onSubmit(){
-        this.user = this.userForm.value;
+    save (){
+        var result;
+        if (this.user.id){
+            result = this.userServices.updateUser(this.user);
+        }else {
+            result = this.userServices.saveUser(this.user);
+        }
 
-        this.userServices.saveUser(this.user).subscribe(res => console.log(res));
+        result.subscribe ( x => {
+            console.log(x);
+           this.router.navigate (['Users']);
+        });
     }
 
+    
 }
