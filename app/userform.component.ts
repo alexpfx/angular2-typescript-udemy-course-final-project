@@ -30,6 +30,8 @@ export class UserFormComponent implements CanDeactivate, OnInit{
             return;
 
 
+        // testando
+
         this.userServices.getUser(id).subscribe(user => this.user = user, res => {
             if (res.status == 404){
                 this.router.navigate(['NotFound']);
