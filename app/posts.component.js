@@ -1,4 +1,4 @@
-System.register(['angular2/core'], function(exports_1, context_1) {
+System.register(['angular2/core', "./post.service", "angular2/http", "./spinner.component"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,23 +10,43 @@ System.register(['angular2/core'], function(exports_1, context_1) {
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1;
+    var core_1, post_service_1, http_1, spinner_component_1;
     var PostsComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
+            },
+            function (post_service_1_1) {
+                post_service_1 = post_service_1_1;
+            },
+            function (http_1_1) {
+                http_1 = http_1_1;
+            },
+            function (spinner_component_1_1) {
+                spinner_component_1 = spinner_component_1_1;
             }],
         execute: function() {
             PostsComponent = (function () {
-                function PostsComponent() {
+                function PostsComponent(postService) {
+                    this.postService = postService;
                 }
+                PostsComponent.prototype.ngOnInit = function () {
+                    var _this = this;
+                    this.isLoading = true;
+                    this.postService.getPosts().subscribe(function (ps) {
+                        _this.posts = ps;
+                        _this.isLoading = false;
+                    });
+                };
                 PostsComponent = __decorate([
                     core_1.Component({
                         selector: 'posts',
-                        templateUrl: './app/posts.component.html'
+                        templateUrl: './app/posts.component.html',
+                        providers: [post_service_1.PostService, http_1.HTTP_PROVIDERS],
+                        directives: [spinner_component_1.SpinnerComponent]
                     }), 
-                    __metadata('design:paramtypes', [])
+                    __metadata('design:paramtypes', [post_service_1.PostService])
                 ], PostsComponent);
                 return PostsComponent;
             }());

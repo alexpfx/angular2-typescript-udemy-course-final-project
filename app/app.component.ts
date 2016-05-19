@@ -25,6 +25,7 @@ import {UserFormComponent} from "./userform.component";
         {path: '/users/:id', name: 'UserDetail', component: UserFormComponent},
         {path: '/users/new', name: 'User', component: UserFormComponent},
         {path: '/posts', name: 'Posts', component: PostsComponent},
+        {path: '/posts/:id', name: 'PostDetail', component: PostsComponent},
         {path: '/*other', name: 'Other', redirectTo: ['Home']}
     ]
 )

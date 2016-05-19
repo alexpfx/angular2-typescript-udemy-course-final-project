@@ -52,6 +52,7 @@ System.register(['angular2/core', "angular2/router", "./navbar.component", "./us
                         { path: '/users/:id', name: 'UserDetail', component: userform_component_1.UserFormComponent },
                         { path: '/users/new', name: 'User', component: userform_component_1.UserFormComponent },
                         { path: '/posts', name: 'Posts', component: posts_component_1.PostsComponent },
+                        { path: '/posts/:id', name: 'PostDetail', component: posts_component_1.PostsComponent },
                         { path: '/*other', name: 'Other', redirectTo: ['Home'] }
                     ]), 
                     __metadata('design:paramtypes', [])
