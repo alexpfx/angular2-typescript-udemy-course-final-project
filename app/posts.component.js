@@ -39,10 +39,14 @@ System.register(['angular2/core', "./post.service", "angular2/http", "./spinner.
                         _this.isLoading = false;
                     });
                 };
+                PostsComponent.prototype.selectPost = function (post) {
+                    this.selectedPost = post;
+                };
                 PostsComponent = __decorate([
                     core_1.Component({
                         selector: 'posts',
                         templateUrl: './app/posts.component.html',
+                        styles: ["\n        .posts li { cursor: default; }\n        .posts li:hover { background: #ecf0f1; } \n        .list-group-item.active, \n        .list-group-item.active:hover, \n        .list-group-item.active:focus { \n            background-color: #ecf0f1;\n            border-color: #ecf0f1; \n            color: #2c3e50;\n        }\n    "],
                         providers: [post_service_1.PostService, http_1.HTTP_PROVIDERS],
                         directives: [spinner_component_1.SpinnerComponent]
                     }), 
