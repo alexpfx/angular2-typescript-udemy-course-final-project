@@ -13,12 +13,17 @@ export class PostService{
 
     }
 
-    getPosts (){
-        return this.http.get(this.url).map(res => res.json ());
+    getPosts (filter){
+        var url = this.url;
+        if (filter && filter.userId){
+            url += "?userId="+filter.userId;
+        }
+        
+        return this.http.get(url).map(res => res.json ());
     }
     
-    getPost(idPost) {
-        return this.http.get
+    getComments (postId){
+        return this.http.get(this.getCommentUrl (postId)).map (res => res.json());
     }
 
     // getUser(userId) {
@@ -26,9 +31,14 @@ export class PostService{
     // }
 
 
+    
+    
     postUrl (id){
         
     }
 
 
+    private getCommentUrl(postId) {
+        return this.url + '/' + postId + '/comments';
+    }
 }

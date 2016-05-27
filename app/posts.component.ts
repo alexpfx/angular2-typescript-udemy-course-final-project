@@ -3,6 +3,7 @@ import {PostService} from "./post.service";
 import {HTTP_PROVIDERS} from "angular2/http";
 import {SpinnerComponent} from "./spinner.component";
 import {Post} from "./post";
+import {UsersService} from "./users.service";
 
 
 @Component({
@@ -19,32 +20,59 @@ import {Post} from "./post";
             color: #2c3e50;
         }
     `],
-    providers: [PostService, HTTP_PROVIDERS],
+    providers: [PostService, UsersService, HTTP_PROVIDERS],
     directives: [SpinnerComponent]
 
 })
 
-export class PostsComponent implements OnInit{
-    selectedPost: Post;
+
+
+export class PostsComponent implements OnInit {
+    selectedPost:Post;
+    comments = [];
 
     ngOnInit():any {
-        this.isLoading = true;
-        this.postService.getPosts().subscribe (ps => {
-           this.posts = ps;
-            this.isLoading = false;
+        this.loadUsers();
+        this.loadPosts();
+
+    }
+
+    private loadUsers() {
+        this.userService.getUsers().subscribe(us =>this.users = us);
+    }
+
+    users = [];
+    posts = [];
+    postLoading:boolean;
+
+    private selectPost(post) {
+        this.selectedPost = post;
+        console.log(post);
+        this.postService.getComments(post.id).subscribe(c => {
+            this.comments = c;
+            console.log(this.comments);
+
+        });
+
+    }
+
+    private loadPosts (filter?){
+        this.postLoading = true;
+
+        this.postService.getPosts(filter).subscribe(ps => {
+            this.posts = ps;
+            this.postLoading = false;
         });
     }
 
+    changeUser (filter){
+        this.selectedPost = null;
+        this.loadPosts(filter);
 
-    posts;
-    isLoading: boolean;
-
-    selectPost(post){
-        this.selectedPost = post;
     }
 
-    constructor (private postService: PostService){
-        
+    constructor(private postService:PostService, private userService: UsersService) {
+
 
     }
 
